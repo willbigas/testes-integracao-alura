@@ -2,7 +2,6 @@ package br.com.alura.leilao.dao;
 
 import br.com.alura.leilao.model.Usuario;
 import br.com.alura.leilao.util.JPAUtil;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,6 +40,14 @@ class UsuarioDaoTest {
         criarUsuario();
         assertThrows(NoResultException.class,
                 () -> dao.buscarPorUsername("beltrano"));
+    }
+
+    @Test
+    void deveriaRemoverUmUsuario(){
+        Usuario usuario = criarUsuario();
+        dao.deletar(usuario);
+        assertThrows(NoResultException.class,
+                () -> dao.buscarPorUsername(usuario.getNome()));
     }
 
     private Usuario criarUsuario() {
